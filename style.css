@@ -1305,6 +1305,74 @@ nav a:hover {
 }
 
 
+/* -------------------- PIED DE PAGE -------------------- */
+
+.footer {
+    padding: 50px 8% 40px;
+
+    background-color: #E1001A;
+    color: white;
+}
+
+
+.footer__row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 30px;
+}
+
+
+.footer__title {
+    margin: 0 0 12px;
+
+    font-size: 1.1rem;
+}
+
+
+.footer__list {
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+
+.footer__list li {
+    margin-bottom: 6px;
+}
+
+
+.footer__list a {
+    color: white;
+    text-decoration: none;
+}
+
+
+.footer__list a:hover,
+.footer__list a:focus-visible {
+    text-decoration: underline;
+}
+
+
+.footer__credits {
+    max-width: 620px;
+
+    margin: 0;
+
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+
+.footer__copyright {
+    margin: 30px 0 0;
+
+    font-size: 0.85rem;
+}
+
+
 /* -------------------- TABLETTE -------------------- */
 
 @media (max-width: 1024px) {
@@ -1635,6 +1703,13 @@ nav a:hover {
         bottom: 18px;
     }
 
+
+    /* -------------------- PIED DE PAGE -------------------- */
+
+    .footer {
+        padding: 45px 6% 35px;
+    }
+
 }
 
 
@@ -1953,6 +2028,30 @@ nav a:hover {
     .transition-cube {
         left: 18px;
         bottom: 16px;
+    }
+
+
+    /* -------------------- PIED DE PAGE -------------------- */
+
+    .footer {
+        padding: 40px 20px 30px;
+    }
+
+
+    .footer__row {
+        flex-direction: column;
+
+        gap: 28px;
+    }
+
+
+    .footer__credits {
+        max-width: none;
+    }
+
+
+    .footer__copyright {
+        margin-top: 25px;
     }
 
 }
