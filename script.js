@@ -284,7 +284,7 @@ const cubeStates = [];
 /*
     Durée de l'effet après un clic.
 
-    7 secondes permettent au cube de tourner davantage
+    4 secondes permettent au cube de tourner davantage
     sans avoir une rotation trop rapide.
 */
 const clickDuration = 4;
@@ -370,11 +370,11 @@ cubeTriggers.forEach(function(cubeTrigger, index) {
     cubeTrigger.addEventListener("click", function() {
 
         /*
-            Au clic, on déclenche 7 secondes
+            Au clic, on déclenche 4 secondes
             de rotation supplémentaire.
 
             Si on reclique pendant l'effet,
-            les 7 secondes recommencent.
+            les 4 secondes recommencent.
         */
         cubeState.clickTimeRemaining = clickDuration;
 
@@ -505,3 +505,101 @@ function animateCubes(currentTime) {
 
 // On lance l'animation une seule fois.
 requestAnimationFrame(animateCubes);
+
+
+// -------------------- JEUX JOUABLES DES PROJETS --------------------
+
+/*
+    Les jeux sont disponibles uniquement sur ordinateur.
+    Ils s'ouvrent dans une fenêtre par-dessus le CV afin de garder
+    le visiteur sur le site sans modifier la mise en page des projets.
+*/
+const gameButtons = document.querySelectorAll(".play-game-button");
+const gameModal = document.getElementById("game-modal");
+const gameModalTitle = document.getElementById("game-modal-title");
+const gameModalClose = document.getElementById("game-modal-close");
+const gameFrame = document.getElementById("game-frame");
+const gameCloseButtons = document.querySelectorAll("[data-game-close]");
+
+
+function openGame(gameButton) {
+
+    // La fonctionnalité reste volontairement désactivée sur tablette et téléphone.
+    if (window.innerWidth <= 1024) {
+        return;
+    }
+
+    const selectedGame = gameButton.dataset.game;
+    const selectedTitle = gameButton.dataset.gameTitle;
+
+    if (!selectedGame || !gameModal || !gameFrame) {
+        return;
+    }
+
+    gameModalTitle.textContent = selectedTitle || "Jeu";
+
+    /*
+        Le jeu est chargé dans une iframe locale.
+        Cela isole son canvas et ses événements clavier du reste du CV.
+    */
+    gameFrame.src = "games/" + selectedGame + ".html?lang=fr";
+
+    gameModal.classList.add("is-open");
+    gameModal.setAttribute("aria-hidden", "false");
+
+    document.body.classList.add("game-modal-open");
+
+    // Le bouton de fermeture reçoit le focus pour rester accessible au clavier.
+    gameModalClose.focus();
+}
+
+
+function closeGame() {
+
+    if (!gameModal || !gameFrame) {
+        return;
+    }
+
+    gameModal.classList.remove("is-open");
+    gameModal.setAttribute("aria-hidden", "true");
+
+    document.body.classList.remove("game-modal-open");
+
+    /*
+        On remet l'iframe à vide : la boucle du jeu s'arrête complètement
+        quand la fenêtre est fermée.
+    */
+    gameFrame.src = "about:blank";
+}
+
+
+gameButtons.forEach(function(gameButton) {
+
+    gameButton.addEventListener("click", function() {
+        openGame(gameButton);
+    });
+
+});
+
+
+gameCloseButtons.forEach(function(closeButton) {
+
+    closeButton.addEventListener("click", function() {
+        closeGame();
+    });
+
+});
+
+
+/*
+    Si la fenêtre devient trop petite pendant qu'un jeu est ouvert,
+    on ferme automatiquement le jeu pour respecter la règle "ordinateur uniquement".
+*/
+window.addEventListener("resize", function() {
+
+    if (window.innerWidth <= 1024 && gameModal.classList.contains("is-open")) {
+        closeGame();
+    }
+
+});
+

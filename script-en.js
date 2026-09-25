@@ -254,7 +254,7 @@ skills.forEach(function(skill) {
 });
 
 
-// -------------------- 3D CUBES --------------------
+// -------------------- CUBES 3D --------------------
 
 // We retrieve all the cubes present in the HTML.
 const cubeTriggers = document.querySelectorAll(".cube-trigger");
@@ -505,3 +505,101 @@ function animateCubes(currentTime) {
 
 // We start the animation only once.
 requestAnimationFrame(animateCubes);
+
+
+// -------------------- PLAYABLE PROJECT GAMES --------------------
+
+/*
+    The games are available on desktop only.
+    They open in a window above the resume so visitors can stay
+    on the website without changing the project layout.
+*/
+const gameButtons = document.querySelectorAll(".play-game-button");
+const gameModal = document.getElementById("game-modal");
+const gameModalTitle = document.getElementById("game-modal-title");
+const gameModalClose = document.getElementById("game-modal-close");
+const gameFrame = document.getElementById("game-frame");
+const gameCloseButtons = document.querySelectorAll("[data-game-close]");
+
+
+function openGame(gameButton) {
+
+    // The feature intentionally stays disabled on tablets and phones.
+    if (window.innerWidth <= 1024) {
+        return;
+    }
+
+    const selectedGame = gameButton.dataset.game;
+    const selectedTitle = gameButton.dataset.gameTitle;
+
+    if (!selectedGame || !gameModal || !gameFrame) {
+        return;
+    }
+
+    gameModalTitle.textContent = selectedTitle || "Game";
+
+    /*
+        The game is loaded inside a local iframe.
+        This isolates its canvas and keyboard events from the rest of the resume.
+    */
+    gameFrame.src = "games/" + selectedGame + ".html?lang=en";
+
+    gameModal.classList.add("is-open");
+    gameModal.setAttribute("aria-hidden", "false");
+
+    document.body.classList.add("game-modal-open");
+
+    // The close button receives focus to remain keyboard-accessible.
+    gameModalClose.focus();
+}
+
+
+function closeGame() {
+
+    if (!gameModal || !gameFrame) {
+        return;
+    }
+
+    gameModal.classList.remove("is-open");
+    gameModal.setAttribute("aria-hidden", "true");
+
+    document.body.classList.remove("game-modal-open");
+
+    /*
+        We reset the iframe to an empty page so the game loop
+        completely stops when the window is closed.
+    */
+    gameFrame.src = "about:blank";
+}
+
+
+gameButtons.forEach(function(gameButton) {
+
+    gameButton.addEventListener("click", function() {
+        openGame(gameButton);
+    });
+
+});
+
+
+gameCloseButtons.forEach(function(closeButton) {
+
+    closeButton.addEventListener("click", function() {
+        closeGame();
+    });
+
+});
+
+
+/*
+    If the viewport becomes too small while a game is open,
+    the game closes automatically to keep the feature desktop-only.
+*/
+window.addEventListener("resize", function() {
+
+    if (window.innerWidth <= 1024 && gameModal.classList.contains("is-open")) {
+        closeGame();
+    }
+
+});
+

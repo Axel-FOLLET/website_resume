@@ -1,0 +1,196 @@
+/* -------------------- BOUTON POUR TESTER LES JEUX -------------------- */
+
+/*
+    Ce bouton reprend volontairement le même style et la même animation
+    que le lien GitHub déjà présent dans les cartes de projets.
+*/
+.play-game-button {
+    display: block;
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 12px 18px;
+
+    border: 1px solid white;
+
+    background-color: transparent;
+    color: white;
+
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.play-game-button:hover,
+.play-game-button:focus-visible {
+    background-color: white;
+    color: #0D0A9B;
+}
+
+
+.play-game-button:focus-visible {
+    outline: 2px solid #E1001A;
+    outline-offset: 4px;
+}
+
+
+/* -------------------- FENÊTRE DES JEUX -------------------- */
+
+body.game-modal-open {
+    overflow: hidden;
+}
+
+
+.game-modal {
+    position: fixed;
+    inset: 0;
+
+    z-index: 5000;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+}
+
+
+.game-modal.is-open {
+    display: flex;
+}
+
+
+/* Fond sombre derrière le jeu, également cliquable pour fermer. */
+.game-modal-backdrop {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 0;
+    border: none;
+
+    background-color: rgba(3, 2, 60, 0.88);
+
+    cursor: pointer;
+}
+
+
+.game-modal-dialog {
+    width: min(96vw, 1280px);
+    height: min(92vh, 900px);
+
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    background-color: #0D0A9B;
+
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+}
+
+
+.game-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 74px;
+
+    padding: 16px 22px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+
+.game-modal-header h2 {
+    margin: 0;
+
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+
+.game-modal-close {
+    width: 44px;
+    height: 44px;
+
+    padding: 0;
+    border: 1px solid white;
+
+    background-color: transparent;
+    color: white;
+
+    font-family: inherit;
+    font-size: 1.7rem;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.game-modal-close:hover,
+.game-modal-close:focus-visible {
+    background-color: #E1001A;
+    border-color: #E1001A;
+}
+
+
+.game-modal-close:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 4px;
+}
+
+
+.game-modal-content {
+    flex: 1;
+
+    min-height: 0;
+
+    padding: 18px;
+}
+
+
+#game-frame {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    border: none;
+
+    background-color: #0D0A9B;
+}
+
+
+/* -------------------- TABLETTE + TÉLÉPHONE -------------------- */
+
+/*
+    Le jeu navigateur est volontairement réservé à la version ordinateur.
+    Les cartes, leurs descriptions et les liens GitHub restent inchangés.
+*/
+@media (max-width: 1024px) {
+
+    .play-game-button {
+        display: none;
+    }
+
+
+    .game-modal {
+        display: none !important;
+    }
+
+}

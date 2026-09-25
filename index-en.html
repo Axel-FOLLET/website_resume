@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="games.css">
     <script src="script-en.js" defer></script>
 
     <title>Axel FOLLET | Resume</title>
@@ -19,7 +20,7 @@
 
         <nav>
 
-            <!-- Identity: profile picture + initials + language selection -->
+            <!-- Identity: picture + initials + language selection -->
             <div class="nav-identity">
 
                 <img
@@ -92,7 +93,7 @@
                 </h2>
 
                 <p>
-                    This website was created entirely by me, using HTML, CSS and JavaScript.
+                    This website was created entirely by me using HTML, CSS and JavaScript.
                     Feel free to explore it!
                 </p>
 
@@ -103,7 +104,7 @@
             </div>
 
 
-            <!-- -------------------- HOME 3D FIGURE -------------------- -->
+            <!-- -------------------- 3D FIGURE HOME -------------------- -->
 
             <div class="home-cubes">
 
@@ -117,7 +118,7 @@
                 ></button>
 
 
-                <!-- Smaller cubes surrounding the main cube -->
+                <!-- Smaller cubes around the main cube -->
                 <button
                     class="cube-trigger cube-small cube-red cube-home-small-1"
                     type="button"
@@ -598,8 +599,8 @@
 
                     <p>
                         My studies at Epitech now allow me to progressively develop
-                        my technical skills while continuing to draw on the experience
-                        I have already gained in project management,
+                        my technical skills while continuing to draw on
+                        the experience I have already gained in project management,
                         communication and independent working.
                     </p>
 
@@ -703,7 +704,7 @@
 
                     <img
                         src="assets/images/dessin_python.png"
-                        alt="Illustration representing my Python skills and projects"
+                        alt="Illustration representing my Python and web development skills and projects"
                         class="project-image"
                     >
 
@@ -745,13 +746,27 @@
                         and graphical rendering.
                     </p>
 
-                    <a
-                        href="https://github.com/Axel-FOLLET/Axou/tree/5f52f135fe0bb45800351c035b74ff3e00f64e5e/jeu_du_snake"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        View project on GitHub
-                    </a>
+                    <div class="project-actions">
+
+                        <a
+                            href="https://github.com/Axel-FOLLET/Axou/tree/5f52f135fe0bb45800351c035b74ff3e00f64e5e/jeu_du_snake"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            View project on GitHub
+                        </a>
+
+                        <!-- Available on desktop only -->
+                        <button
+                            class="play-game-button"
+                            type="button"
+                            data-game="snake"
+                            data-game-title="Snake"
+                        >
+                            Try the game now?
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -773,18 +788,32 @@
                     </p>
 
                     <p>
-                        This project allowed me to work with conditions,
-                        loops, functions, user input handling
+                        This project allowed me to work with conditions, loops,
+                        functions, user input handling
                         and the overall organization of a program.
                     </p>
 
-                    <a
-                        href="https://github.com/Axel-FOLLET/Axou/tree/5f52f135fe0bb45800351c035b74ff3e00f64e5e/jeu_du_pendu"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        View project on GitHub
-                    </a>
+                    <div class="project-actions">
+
+                        <a
+                            href="https://github.com/Axel-FOLLET/Axou/tree/5f52f135fe0bb45800351c035b74ff3e00f64e5e/jeu_du_pendu"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            View project on GitHub
+                        </a>
+
+                        <!-- Available on desktop only -->
+                        <button
+                            class="play-game-button"
+                            type="button"
+                            data-game="pendu"
+                            data-game-title="Hangman"
+                        >
+                            Try the game now?
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -812,8 +841,8 @@
             <h2>Get in touch</h2>
 
             <p class="contact-intro">
-                Would you like to discuss an opportunity,
-                a project, or simply learn more about my background?
+                Would you like to discuss an opportunity, a project,
+                or simply learn more about my background?
                 Feel free to get in touch!
             </p>
 
@@ -834,7 +863,7 @@
                 <!-- Left section -->
                 <div class="contact-main">
 
-                    <!-- -------------------- CONTACT FORM -------------------- -->
+                    <!-- -------------------- FORM -------------------- -->
 
                     <form
                         class="contact-form"
@@ -951,7 +980,7 @@
 
                             <img
                                 src="assets/images/linkedin.jpg"
-                                alt="LinkedIn logo"
+                                alt="Logo LinkedIn"
                             >
 
                             Would you like to view my LinkedIn profile?
@@ -1016,6 +1045,51 @@
         </section>
 
     </main>
+
+
+    <!-- -------------------- DESKTOP GAME WINDOW -------------------- -->
+
+    <div
+        id="game-modal"
+        class="game-modal"
+        aria-hidden="true"
+    >
+        <button
+            class="game-modal-backdrop"
+            type="button"
+            data-game-close
+            aria-label="Close the game"
+        ></button>
+
+        <div
+            class="game-modal-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="game-modal-title"
+        >
+            <div class="game-modal-header">
+                <h2 id="game-modal-title">Game</h2>
+
+                <button
+                    id="game-modal-close"
+                    class="game-modal-close"
+                    type="button"
+                    data-game-close
+                    aria-label="Close the game"
+                >
+                    ×
+                </button>
+            </div>
+
+            <div class="game-modal-content">
+                <iframe
+                    id="game-frame"
+                    title="Playable game"
+                    src="about:blank"
+                ></iframe>
+            </div>
+        </div>
+    </div>
 
 </body>
 

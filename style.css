@@ -912,17 +912,32 @@ nav a:hover {
 
 /* -------------------- LIEN PROJET -------------------- */
 
-.project-card a {
-    display: inline-block;
+/*
+    Les deux boutons (GitHub + test du jeu) sont empilés dans un conteneur
+    qui prend la largeur du plus large : ils ont ainsi la même taille.
+*/
+.project-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
     align-self: flex-start;
 
+    max-width: 100%;
     margin-top: auto;
+}
+
+
+.project-card a {
+    display: block;
+    box-sizing: border-box;
+
     padding: 12px 18px;
 
     border: 1px solid white;
 
     color: white;
+    text-align: center;
     text-decoration: none;
 
     transition: 0.3s;
