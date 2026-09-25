@@ -950,6 +950,35 @@ nav a:hover {
 }
 
 
+/*
+    Copie invisible du bouton "Tester le jeu" : elle ne prend aucune hauteur
+    mais impose la même largeur au bouton portfolio de la carte Python.
+*/
+.project-actions-sizer {
+    display: block;
+    height: 0;
+    overflow: hidden;
+
+    margin-top: -10px;
+    padding: 0 18px;
+
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+
+    visibility: hidden;
+}
+
+
+/* Le bouton de test des jeux est masqué sur mobile : la copie aussi */
+@media (max-width: 1024px) {
+
+    .project-actions-sizer {
+        display: none;
+    }
+
+}
+
+
 /* -------------------- CONTACT -------------------- */
 
 #contact {
@@ -1141,7 +1170,54 @@ nav a:hover {
 /* -------------------- LINKEDIN -------------------- */
 
 .contact-links {
+    display: flex;
+    flex-direction: column;
+    /* Les deux liens prennent la largeur du plus large */
+    align-items: stretch;
+    width: fit-content;
+
+    gap: 14px;
+
     margin: 35px 0 50px;
+}
+
+
+/*
+    Petit cube blanc qui remplace le logo dans le lien portfolio.
+    Le cube fait 18px, la marge le centre dans un carré de 30px
+    comme le logo LinkedIn.
+*/
+.cube-icon {
+    --cube-size: 18px;
+    --cube-half: 9px;
+
+    flex-shrink: 0;
+
+    margin: 6px;
+
+    perspective: 300px;
+}
+
+
+.cube-white {
+    --cube-border: white;
+
+    --cube-fill: rgba(255, 255, 255, 0.06);
+    --cube-hover: rgba(255, 255, 255, 0.2);
+
+    --cube-glow: rgba(255, 255, 255, 0.25);
+}
+
+
+.cube-icon .cube-face {
+    border-width: 1.5px;
+
+    box-shadow: 0 0 6px var(--cube-glow);
+}
+
+
+.portfolio-link:hover .cube-face {
+    background-color: var(--cube-hover);
 }
 
 
@@ -1859,6 +1935,16 @@ nav a:hover {
     .linkedin-link img {
         width: 28px;
         height: 28px;
+    }
+
+
+    .contact-links {
+        width: 100%;
+    }
+
+
+    .cube-icon {
+        margin: 5px;
     }
 
 
