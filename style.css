@@ -1243,11 +1243,18 @@ nav a:hover {
 }
 
 
+/*
+    Le logo officiel est noir avec le fond et le « in » transparents.
+    Sur le fond bleu, on le passe en blanc (version inversée autorisée) :
+    le « in » transparent laisse voir le bleu de la page.
+*/
 .linkedin-link img {
     width: 30px;
     height: 30px;
 
     object-fit: contain;
+
+    filter: brightness(0) invert(1);
 }
 
 
