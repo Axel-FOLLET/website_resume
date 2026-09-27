@@ -1,27 +1,55 @@
 <!doctype html>
 <html lang="en">
 
-<head>
+<head>    <!-- Repères : les id servent aux ancres et à ARIA ; les classes BEM servent au style. Les attributs data-* transmettent des paramètres aux modules JavaScript. -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css?v=2">
-    <link rel="stylesheet" href="games.css?v=2">
-    <script src="script-en.js?v=2" defer></script>
+    <!-- Ordre de la cascade : base, composants, adaptations responsive, puis fenêtre des jeux. -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/cubes.css">
+    <link rel="stylesheet" href="css/education.css">
+    <link rel="stylesheet" href="css/experience.css">
+    <link rel="stylesheet" href="css/career.css">
+    <link rel="stylesheet" href="css/projects.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/game-modal.css">
+    <!-- type=module active import/export et attend l'analyse du HTML ; main.js initialise les interactions des deux langues. -->
+    <script type="module" src="js/main.js"></script>
 
     <title>Axel FOLLET | Resume</title>
 </head>
 
-<body>
+<body class="page">
 
     <!-- -------------------- NAVIGATION -------------------- -->
 
-    <header>
+    <header class="site-header">
 
-        <nav>
+        <!-- Le bouton met à jour aria-expanded ; aria-controls désigne le conteneur des liens. navigation--open commande leur visibilité. -->
+        <nav class="navigation">
+
+            <button
+                class="navigation__toggle"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                aria-controls="navigation-links"
+            >
+                <span class="navigation__toggle-icon" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
 
             <!-- Identity: picture + initials + language selection -->
-            <div class="nav-identity">
+            <div class="navigation__identity">
 
                 <img
                     src="assets/images/profile.jpg"
@@ -30,13 +58,12 @@
 
                 <a href="#home">AF</a>
 
-                <div class="language-menu">
+                <div class="language-switch">
 
                     <select
                         id="language-select"
-                        onchange="window.location.href=this.value"
                         aria-label="Choose language"
-                    >
+                     class="language-switch__select">
 
                         <option value="index.html">
                             FR
@@ -54,7 +81,7 @@
 
 
             <!-- Links to the different sections -->
-            <div class="nav-links">
+            <div class="navigation__links" id="navigation-links">
 
                 <a href="#formation">Education</a>
                 <a href="#experience">Experience</a>
@@ -76,10 +103,10 @@
 
         <!-- -------------------- HOME -------------------- -->
 
-        <section id="home">
+        <section id="home" class="home">
 
             <!-- Main text section -->
-            <div class="grande_zone_principale-text">
+            <div class="home__text">
 
                 <p>RESUME / 2026</p>
 
@@ -106,11 +133,12 @@
 
             <!-- -------------------- 3D FIGURE HOME -------------------- -->
 
-            <div class="home-cubes">
+            <!-- Les cubes combinent un bloc réutilisable, ses variantes de taille/couleur et son placement. data-speed fixe la vitesse et data-phase l'orientation initiale ; JavaScript crée les six faces. -->
+            <div class="home__cubes">
 
                 <!-- Main cube -->
                 <button
-                    class="cube-trigger cube-large cube-red cube-home-main"
+                    class="cube cube--large cube--red home__cube--main home__cube"
                     type="button"
                     aria-label="Spin the main cube"
                     data-speed="16"
@@ -120,7 +148,7 @@
 
                 <!-- Smaller cubes around the main cube -->
                 <button
-                    class="cube-trigger cube-small cube-red cube-home-small-1"
+                    class="cube cube--small cube--red home__cube--satellite-1 home__cube"
                     type="button"
                     aria-label="Spin the cube"
                     data-speed="21"
@@ -128,7 +156,7 @@
                 ></button>
 
                 <button
-                    class="cube-trigger cube-small cube-red cube-home-small-2"
+                    class="cube cube--small cube--red home__cube--satellite-2 home__cube"
                     type="button"
                     aria-label="Spin the cube"
                     data-speed="18"
@@ -136,7 +164,7 @@
                 ></button>
 
                 <button
-                    class="cube-trigger cube-tiny cube-red cube-home-small-3"
+                    class="cube cube--tiny cube--red home__cube--satellite-3 home__cube"
                     type="button"
                     aria-label="Spin the cube"
                     data-speed="23"
@@ -144,7 +172,7 @@
                 ></button>
 
                 <button
-                    class="cube-trigger cube-tiny cube-red cube-home-small-4"
+                    class="cube cube--tiny cube--red home__cube--satellite-4 home__cube"
                     type="button"
                     aria-label="Spin the cube"
                     data-speed="19"
@@ -156,7 +184,7 @@
 
             <!-- Cube placed at the bottom of the section -->
             <button
-                class="cube-trigger cube-tiny cube-red transition-cube"
+                class="cube cube--tiny cube--red cube--transition"
                 type="button"
                 aria-label="Spin the cube"
                 data-speed="13"
@@ -168,11 +196,11 @@
 
         <!-- -------------------- EDUCATION -------------------- -->
 
-        <section id="formation">
+        <section id="formation" class="education">
 
             <!-- Small decorative cube -->
             <button
-                class="cube-trigger cube-tiny cube-red section-cube formation-cube"
+                class="cube cube--tiny cube--red cube--section education__cube"
                 type="button"
                 aria-label="Spin the cube"
                 data-speed="17"
@@ -181,7 +209,7 @@
 
 
             <!-- Current education -->
-            <div class="formation-content">
+            <div class="education__content">
 
                 <p>01 / EDUCATION</p>
 
@@ -218,7 +246,7 @@
 
 
             <!-- Previous education -->
-            <div class="formation-content">
+            <div class="education__content">
 
                 <h2>
                     Sup des RH & EDC Paris
@@ -244,7 +272,7 @@
 
             <!-- Cube placed at the bottom of the section -->
             <button
-                class="cube-trigger cube-tiny cube-red transition-cube"
+                class="cube cube--tiny cube--red cube--transition"
                 type="button"
                 aria-label="Spin the cube"
                 data-speed="14"
@@ -256,11 +284,11 @@
 
         <!-- -------------------- EXPERIENCE -------------------- -->
 
-        <section id="experience">
+        <section id="experience" class="experience">
 
             <!-- Small decorative cube -->
             <button
-                class="cube-trigger cube-tiny cube-red section-cube experience-cube"
+                class="cube cube--tiny cube--red cube--section experience__cube"
                 type="button"
                 aria-label="Spin the cube"
                 data-speed="18"
@@ -278,22 +306,22 @@
 
             <!-- -------------------- MAIN CONTAINER -------------------- -->
 
-            <div class="experience-layout">
+            <div class="experience__layout">
 
 
                 <!-- -------------------- EXPERIENCE LIST -------------------- -->
 
-                <div class="experience-list">
+                <div class="experience__list">
 
 
                     <!-- -------------------- SFR -------------------- -->
 
                     <div class="experience-card" id="experience-sfr">
 
-                        <div class="experience-card-inner">
+                        <div class="experience-card__inner">
 
                             <!-- Front -->
-                            <div class="experience-card-front">
+                            <div class="experience-card__front">
 
                                 <h2>SFR Distribution</h2>
 
@@ -321,7 +349,7 @@
 
 
                             <!-- Back -->
-                            <div class="experience-card-back">
+                            <div class="experience-card__back">
 
                                 <h3>Skills & tools</h3>
 
@@ -349,10 +377,10 @@
 
                     <div class="experience-card" id="experience-bpce">
 
-                        <div class="experience-card-inner">
+                        <div class="experience-card__inner">
 
                             <!-- Front -->
-                            <div class="experience-card-front">
+                            <div class="experience-card__front">
 
                                 <h2>BPCE Infogérance et Technologies</h2>
 
@@ -379,7 +407,7 @@
 
 
                             <!-- Back -->
-                            <div class="experience-card-back">
+                            <div class="experience-card__back">
 
                                 <h3>Skills & tools</h3>
 
@@ -406,10 +434,10 @@
 
                     <div class="experience-card" id="experience-ocp">
 
-                        <div class="experience-card-inner">
+                        <div class="experience-card__inner">
 
                             <!-- Front -->
-                            <div class="experience-card-front">
+                            <div class="experience-card__front">
 
                                 <h2>OCP Répartition</h2>
 
@@ -436,7 +464,7 @@
 
 
                             <!-- Back -->
-                            <div class="experience-card-back">
+                            <div class="experience-card__back">
 
                                 <h3>Skills & tools</h3>
 
@@ -463,10 +491,10 @@
 
                     <div class="experience-card" id="experience-natixis">
 
-                        <div class="experience-card-inner">
+                        <div class="experience-card__inner">
 
                             <!-- Front -->
-                            <div class="experience-card-front">
+                            <div class="experience-card__front">
 
                                 <h2>Natixis</h2>
 
@@ -482,7 +510,7 @@
 
 
                             <!-- Back -->
-                            <div class="experience-card-back">
+                            <div class="experience-card__back">
 
                                 <h3>Skills & tools</h3>
 
@@ -503,10 +531,10 @@
 
                     <div class="experience-card" id="experience-enedis">
 
-                        <div class="experience-card-inner">
+                        <div class="experience-card__inner">
 
                             <!-- Front -->
-                            <div class="experience-card-front">
+                            <div class="experience-card__front">
 
                                 <h2>Enedis</h2>
 
@@ -522,7 +550,7 @@
 
 
                             <!-- Back -->
-                            <div class="experience-card-back">
+                            <div class="experience-card__back">
 
                                 <h3>Skills & tools</h3>
 
@@ -542,7 +570,7 @@
 
                 <!-- -------------------- DESKTOP SKILLS PANEL -------------------- -->
 
-                <div id="skills-bubble">
+                <div id="skills-bubble" class="experience__skills">
                     Select an experience
                 </div>
 
@@ -551,7 +579,7 @@
 
             <!-- Cube placed at the bottom of the section -->
             <button
-                class="cube-trigger cube-tiny cube-red transition-cube"
+                class="cube cube--tiny cube--red cube--transition"
                 type="button"
                 aria-label="Spin the cube"
                 data-speed="13"
@@ -563,21 +591,21 @@
 
         <!-- -------------------- IT CAREER CHANGE -------------------- -->
 
-        <section id="reconversion">
+        <section id="reconversion" class="career">
 
-            <div class="reconversion-banner">
+            <div class="career__banner">
 
-                <p class="reconversion-number">
+                <p class="career__number">
                     03 / IT CAREER CHANGE
                 </p>
 
 
-                <div class="reconversion-line"></div>
+                <div class="career__line"></div>
 
 
                 <!-- -------------------- INTRODUCTION -------------------- -->
 
-                <div class="reconversion-intro">
+                <div class="career__intro">
 
                     <h2>
                         From HR project management
@@ -591,7 +619,7 @@
                         the IT industry.
                     </p>
 
-                    <p class="goal-highlight">
+                    <p class="career__goal">
                         The objective was clear: to adapt to the changes shaping our society,
                         where technology is playing an increasingly important role,
                         and to move into a field that has always interested me.
@@ -609,11 +637,11 @@
 
                 <!-- -------------------- TECHNICAL SKILLS -------------------- -->
 
-                <div class="reconversion-skills">
+                <div class="career__skills skills">
 
                     <!-- Blue cube -->
                     <button
-                        class="cube-trigger cube-medium cube-blue reconversion-cube"
+                        class="cube cube--medium cube--blue career__cube"
                         type="button"
                         aria-label="Spin the cube"
                         data-speed="16"
@@ -626,32 +654,32 @@
                     </h3>
 
 
-                    <div class="skills-list">
+                    <div class="skills__list">
 
-                        <button class="skill" data-skill="python" type="button">
+                        <button class="skills__button" data-skill="python" type="button">
                             Python
                         </button>
 
-                        <button class="skill" data-skill="html" type="button">
+                        <button class="skills__button" data-skill="html" type="button">
                             HTML
                         </button>
 
-                        <button class="skill" data-skill="css" type="button">
+                        <button class="skills__button" data-skill="css" type="button">
                             CSS
                         </button>
 
-                        <button class="skill" data-skill="javascript" type="button">
+                        <button class="skills__button" data-skill="javascript" type="button">
                             JavaScript
                         </button>
 
-                        <button class="skill" data-skill="git" type="button">
+                        <button class="skills__button" data-skill="git" type="button">
                             Git
                         </button>
 
                     </div>
 
 
-                    <div id="skill-description">
+                    <div id="skill-description" class="skills__description">
                         Select a skill to learn more.
                     </div>
 
@@ -662,7 +690,7 @@
 
             <!-- Cube placed at the bottom of the section -->
             <button
-                class="cube-trigger cube-tiny cube-red transition-cube"
+                class="cube cube--tiny cube--red cube--transition"
                 type="button"
                 aria-label="Spin the cube"
                 data-speed="14"
@@ -674,7 +702,7 @@
 
         <!-- -------------------- PROJECTS -------------------- -->
 
-        <section id="projects">
+        <section id="projects" class="projects">
 
             <p>04 / PROJECTS</p>
 
@@ -685,7 +713,7 @@
 
             <!-- Small decorative cube -->
             <button
-                class="cube-trigger cube-tiny cube-red section-cube projects-cube"
+                class="cube cube--tiny cube--red cube--section projects__cube"
                 type="button"
                 aria-label="Spin the cube"
                 data-speed="18"
@@ -695,7 +723,7 @@
 
             <!-- -------------------- PROJECTS CONTAINER -------------------- -->
 
-            <div class="projects-list">
+            <div class="projects__list">
 
 
                 <!-- -------------------- PYTHON -------------------- -->
@@ -705,7 +733,7 @@
                     <img
                         src="assets/images/dessin_python.png"
                         alt="Illustration representing my Python and web development skills and projects"
-                        class="project-image"
+                        class="project-card__image"
                     >
 
                     <h3>Python & Web</h3>
@@ -721,7 +749,7 @@
                         DOM manipulation, animations, debugging and code organization.
                     </p>
 
-                    <div class="project-actions">
+                    <div class="project-card__actions">
 
                         <a
                             href="https://axel-follet.github.io/portfolio/index-en.html"
@@ -732,7 +760,7 @@
                         </a>
 
                         <!-- Invisible : donne au bouton la même largeur que ceux de Snake et Pendu -->
-                        <span class="project-actions-sizer" aria-hidden="true">
+                        <span class="project-card__sizer" aria-hidden="true">
                             Try the game now?
                         </span>
 
@@ -748,7 +776,7 @@
                     <img
                         src="assets/images/dessin_snake.png"
                         alt="Illustration of the Snake game developed in Python"
-                        class="project-image"
+                        class="project-card__image"
                     >
 
                     <h3>Snake</h3>
@@ -763,7 +791,7 @@
                         and graphical rendering.
                     </p>
 
-                    <div class="project-actions">
+                    <div class="project-card__actions">
 
                         <a
                             href="https://github.com/Axel-FOLLET/Axou/tree/5f52f135fe0bb45800351c035b74ff3e00f64e5e/jeu_du_snake"
@@ -775,7 +803,7 @@
 
                         <!-- Available on desktop only -->
                         <button
-                            class="play-game-button"
+                            class="project-card__play"
                             type="button"
                             data-game="snake"
                             data-game-title="Snake"
@@ -795,7 +823,7 @@
                     <img
                         src="assets/images/dessin_pendu.png"
                         alt="Illustration of the Hangman game developed in Python"
-                        class="project-image"
+                        class="project-card__image"
                     >
 
                     <h3>Hangman</h3>
@@ -810,7 +838,7 @@
                         and the overall organization of a program.
                     </p>
 
-                    <div class="project-actions">
+                    <div class="project-card__actions">
 
                         <a
                             href="https://github.com/Axel-FOLLET/Axou/tree/5f52f135fe0bb45800351c035b74ff3e00f64e5e/jeu_du_pendu"
@@ -822,7 +850,7 @@
 
                         <!-- Available on desktop only -->
                         <button
-                            class="play-game-button"
+                            class="project-card__play"
                             type="button"
                             data-game="pendu"
                             data-game-title="Hangman"
@@ -839,7 +867,7 @@
 
             <!-- Cube placed at the bottom of the section -->
             <button
-                class="cube-trigger cube-tiny cube-red transition-cube"
+                class="cube cube--tiny cube--red cube--transition"
                 type="button"
                 aria-label="Spin the cube"
                 data-speed="13"
@@ -851,13 +879,13 @@
 
         <!-- -------------------- CONTACT -------------------- -->
 
-        <section id="contact">
+        <section id="contact" class="contact">
 
             <p>05 / CONTACT</p>
 
             <h2>Get in touch</h2>
 
-            <p class="contact-intro">
+            <p class="contact__intro">
                 Would you like to discuss an opportunity, a project,
                 or simply learn more about my background?
                 Feel free to get in touch!
@@ -866,7 +894,7 @@
 
             <!-- -------------------- LINKEDIN -------------------- -->
 
-            <div class="contact-links">
+            <div class="contact__links">
 
                 <a
                     href="https://www.linkedin.com/in/axel-follet/"
@@ -893,7 +921,7 @@
 
                     <!-- Petit cube blanc animé à la place d'un logo -->
                     <span
-                        class="cube-trigger cube-icon cube-white"
+                        class="cube cube--icon cube--white"
                         aria-hidden="true"
                         data-speed="40"
                         data-phase="60"
@@ -907,7 +935,7 @@
 
 
             <!-- Accent bars -->
-            <div class="contact-bars">
+            <div class="contact__bars">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -916,11 +944,11 @@
 
             <!-- -------------------- CONTACT CONTENT -------------------- -->
 
-            <div class="contact-layout">
+            <div class="contact__layout">
 
 
                 <!-- Left section -->
-                <div class="contact-main">
+                <div class="contact__main">
 
                     <!-- -------------------- FORM -------------------- -->
 
@@ -930,10 +958,10 @@
                         method="POST"
                     >
 
-                        <div class="contact-name-row">
+                        <div class="contact-form__name-row">
 
                             <!-- Last name -->
-                            <div class="contact-field">
+                            <div class="contact-form__field">
 
                                 <label for="surname">
                                     LAST NAME
@@ -950,7 +978,7 @@
 
 
                             <!-- First name -->
-                            <div class="contact-field">
+                            <div class="contact-form__field">
 
                                 <label for="name">
                                     First name
@@ -969,7 +997,7 @@
 
 
                         <!-- Email -->
-                        <div class="contact-field">
+                        <div class="contact-form__field">
 
                             <label for="email">
                                 Email
@@ -986,7 +1014,7 @@
 
 
                         <!-- Subject -->
-                        <div class="contact-field">
+                        <div class="contact-form__field">
 
                             <label for="subject">
                                 Subject
@@ -1003,7 +1031,7 @@
 
 
                         <!-- Message -->
-                        <div class="contact-field">
+                        <div class="contact-form__field">
 
                             <label for="message">
                                 Message
@@ -1019,7 +1047,7 @@
                         </div>
 
 
-                        <button type="submit" class="contact-submit">
+                        <button type="submit" class="contact-form__submit">
                             Send
                         </button>
 
@@ -1030,10 +1058,10 @@
 
                 <!-- -------------------- CONTACT 3D FIGURE -------------------- -->
 
-                <div class="contact-cubes">
+                <div class="contact__cubes">
 
                     <button
-                        class="cube-trigger cube-large cube-red cube-contact-main"
+                        class="cube cube--large cube--red contact__cube--main contact__cube"
                         type="button"
                         aria-label="Spin the main cube"
                         data-speed="15"
@@ -1041,7 +1069,7 @@
                     ></button>
 
                     <button
-                        class="cube-trigger cube-small cube-red cube-contact-small-1"
+                        class="cube cube--small cube--red contact__cube--satellite-1 contact__cube"
                         type="button"
                         aria-label="Spin the cube"
                         data-speed="20"
@@ -1049,7 +1077,7 @@
                     ></button>
 
                     <button
-                        class="cube-trigger cube-small cube-red cube-contact-small-2"
+                        class="cube cube--small cube--red contact__cube--satellite-2 contact__cube"
                         type="button"
                         aria-label="Spin the cube"
                         data-speed="18"
@@ -1057,7 +1085,7 @@
                     ></button>
 
                     <button
-                        class="cube-trigger cube-tiny cube-red cube-contact-small-3"
+                        class="cube cube--tiny cube--red contact__cube--satellite-3 contact__cube"
                         type="button"
                         aria-label="Spin the cube"
                         data-speed="21"
@@ -1071,7 +1099,7 @@
 
             <!-- Final cube -->
             <button
-                class="cube-trigger cube-tiny cube-red transition-cube"
+                class="cube cube--tiny cube--red cube--transition"
                 type="button"
                 aria-label="Spin the cube"
                 data-speed="13"
@@ -1125,24 +1153,24 @@
         aria-hidden="true"
     >
         <button
-            class="game-modal-backdrop"
+            class="game-modal__backdrop"
             type="button"
             data-game-close
             aria-label="Close the game"
         ></button>
 
         <div
-            class="game-modal-dialog"
+            class="game-modal__dialog"
             role="dialog"
             aria-modal="true"
             aria-labelledby="game-modal-title"
         >
-            <div class="game-modal-header">
+            <div class="game-modal__header">
                 <h2 id="game-modal-title">Game</h2>
 
                 <button
                     id="game-modal-close"
-                    class="game-modal-close"
+                    class="game-modal__close"
                     type="button"
                     data-game-close
                     aria-label="Close the game"
@@ -1151,12 +1179,13 @@
                 </button>
             </div>
 
-            <div class="game-modal-content">
+            <!-- L'iframe héberge son propre document et ses commandes clavier. Son adresse est choisie au clic ; about:blank décharge le jeu à la fermeture. -->
+            <div class="game-modal__content">
                 <iframe
                     id="game-frame"
                     title="Playable game"
                     src="about:blank"
-                ></iframe>
+                 class="game-modal__frame"></iframe>
             </div>
         </div>
     </div>
